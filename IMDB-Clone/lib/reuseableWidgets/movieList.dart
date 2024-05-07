@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:imdb_clone/screens/home.dart';
-import 'package:imdb_clone/secrets.dart';
+import 'package:imdb_clone/screens/secrets.dart';
+
 
 class MovieItem extends StatefulWidget {
   const MovieItem({required this.name,

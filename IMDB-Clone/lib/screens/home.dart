@@ -71,10 +71,16 @@ class HomeScreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            SizedBox(
+              height: 20,
+              child: Container(
+                color: Colors.black,
+              ),
+            ),
             Container(
               color: Colors.white10,
               padding: const EdgeInsets.only(
-                top: 30.0,
+                //top: 30.0,
                 bottom: 30.0,
               ),
               child: Column(

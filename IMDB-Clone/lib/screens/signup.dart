@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io' show Platform;
+
+import 'package:imdb_clone/utils/colors.dart';
 //livvid call
 //true caller
 
@@ -11,7 +13,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Image(
-        image: ResizeImage(AssetImage("logos/imdb.png"), width: 75, height: 65),
+        image: ResizeImage(AssetImage("logos/play.png"), width: 75, height: 55),
       ),
     );
   }
@@ -146,8 +148,8 @@ class _SignUpState extends State<SignUp> {
                 },
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.amberAccent)),
-                child: const Text("Create Your IMDb account",
+                        MaterialStateProperty.all<Color>(AppColor.bloodred)),
+                child: const Text("Create Your account",
                     style: TextStyle(color: Colors.black)),
               )
             ],

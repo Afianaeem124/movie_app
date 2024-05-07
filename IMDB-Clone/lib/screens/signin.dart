@@ -176,7 +176,7 @@ class _BodyState extends State<Body> {
                       MaterialStateProperty.all<Color>(Colors.grey),
                 ),
                 child: const Text(
-                  "Create a new IMDb account",
+                  "Create a new  account",
                   style: TextStyle(color: Colors.black),
                 ))
           ],

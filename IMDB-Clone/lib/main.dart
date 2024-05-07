@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/signin",
+      initialRoute: "/signup",
       routes: {
         "/": (context) => const SignIn(),
         "/home": (context) => const HomeScreen(),

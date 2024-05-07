@@ -15,7 +15,8 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             UserInfo(data: data),
-            const ListsAndReviews(),
+            SizedBox(height: 30,),
+            //const ListsAndReviews(),
             Container(
               // margin: const EdgeInsets.only(top: 20.0),
               color: Colors.white10,
@@ -90,7 +91,7 @@ class UserInfo extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(top: 40.0, left: 20.0),
               child: const Icon(
-                Icons.person_rounded,
+                Icons.person_2_outlined,
                 color: Colors.white,
               ),
             ),
@@ -117,92 +118,92 @@ class UserInfo extends StatelessWidget {
   }
 }
 
-class ListAndReviewItem extends StatelessWidget {
-  const ListAndReviewItem({
-    required this.title,
-    super.key,
-  });
-  final String title;
+// class ListAndReviewItem extends StatelessWidget {
+//   const ListAndReviewItem({
+//     required this.title,
+//     super.key,
+//   });
+//   final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 220,
-      height: 200,
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(8.0),
-        ),
-      ),
-      margin: const EdgeInsets.only(left: 20.0, top: 30.0),
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 15.0),
-      child: Column(
-        children: [
-          Container(
-              width: 180,
-              height: 120,
-              decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: Center(
-                  child: Text("Create a $title",
-                      style: const TextStyle(
-                          color: Colors.blue, fontSize: 17.0)))),
-          Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 9.0,
-                top: 10.0,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 9.0,
-                top: 5.0,
-              ),
-              width: double.infinity,
-              child: const Text(
-                "0",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ]),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 220,
+//       height: 200,
+//       decoration: BoxDecoration(
+//         color: Colors.grey[900],
+//         borderRadius: const BorderRadius.all(
+//           Radius.circular(8.0),
+//         ),
+//       ),
+//       margin: const EdgeInsets.only(left: 20.0, top: 30.0),
+//       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 15.0),
+//       child: Column(
+//         children: [
+//           Container(
+//               width: 180,
+//               height: 120,
+//               decoration: const BoxDecoration(
+//                   color: Colors.black,
+//                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
+//               child: Center(
+//                   child: Text("Create a $title",
+//                       style: const TextStyle(
+//                           color: Colors.blue, fontSize: 17.0)))),
+//           Column(children: [
+//             Padding(
+//               padding: const EdgeInsets.only(
+//                 left: 9.0,
+//                 top: 10.0,
+//               ),
+//               child: SizedBox(
+//                 width: double.infinity,
+//                 child: Text(
+//                   title,
+//                   style: const TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 15,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             Container(
+//               padding: const EdgeInsets.only(
+//                 left: 9.0,
+//                 top: 5.0,
+//               ),
+//               width: double.infinity,
+//               child: const Text(
+//                 "0",
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//           ]),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-class ListsAndReviews extends StatelessWidget {
-  const ListsAndReviews({Key? key}) : super(key: key);
+// class ListsAndReviews extends StatelessWidget {
+//   const ListsAndReviews({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: const [
-          ListAndReviewItem(title: "Rating"),
-          ListAndReviewItem(title: "Lists"),
-          ListAndReviewItem(title: "Review"),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: const [
+//           ListAndReviewItem(title: "Rating"),
+//           ListAndReviewItem(title: "Lists"),
+//           ListAndReviewItem(title: "Review"),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // class UselessInfo extends StatelessWidget {
 //   const UselessInfo({

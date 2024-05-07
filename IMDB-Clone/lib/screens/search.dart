@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:imdb_clone/secrets.dart';
+import 'package:imdb_clone/screens/secrets.dart';
+//import 'package:imdb_clone/secrets.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -37,25 +38,25 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
-                      Center(
-                        child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.only(top: 0, left: 10),
-                            child: const Icon(Icons.search_rounded,
-                                color: Colors.black, size: 22)),
-                      ),
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                         // margin: const EdgeInsets.only(top: 0, left: 10),
+                          child: const Icon(Icons.search_rounded,
+                              color: Colors.black, size: 22)),
                       Container(
                           margin: const EdgeInsets.only(top: 0, left: 10),
                           child: Text(
                             "Search IMDb",
                             style: TextStyle(
                                 fontSize: 18, color: Colors.grey[900]),
-                          ))
+                          )),
+                         
                     ],
                   ),
                 ),
               ),
             ),
+             SizedBox(width: 15,)
           ],
         ),
         body: SingleChildScrollView(
@@ -168,43 +169,67 @@ class TopicSearch extends SearchDelegate<String> {
     }
   }
 
-  Widget buildSuggestionsSuccess(List<dynamic> suggestions) {
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
-        return Container(
-            color: Colors.black,
-            child: FutureBuilder(
-              future: fetchTypeOfSearch(suggestion),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final type = snapshot.data;
-                  return SizedBox(
-                    height: 100,
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/mediainfo',
-                              arguments: {"name": suggestion});
-                        },
-                        child: ListTile(
-                            leading: Image.network(type![1]),
-                            title: Text(suggestion,
-                                style: const TextStyle(color: Colors.white)),
-                            subtitle: Text(type[0],
-                                style: const TextStyle(color: Colors.grey)))),
-                  );
-                } else {
-                  return ListTile(
-                    leading: const Icon(Icons.local_movies),
-                    title: Text(suggestion),
-                  );
-                }
-              },
-            ));
-      },
-    );
-  }
+Widget buildSuggestionsSuccess(List<dynamic> suggestions) {
+  return ListView.builder(
+    itemCount: suggestions.length,
+    itemBuilder: (context, index) {
+      final suggestion = suggestions[index];
+      return Container(
+        color: Colors.black,
+        child: FutureBuilder(
+          future: fetchTypeOfSearch(suggestion),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator(
+                value: null,
+                          strokeWidth: 9.0,
+              );
+            } else if (snapshot.hasError) {
+              return ListTile(
+                title: Text('Error: ${snapshot.error}'),
+              );
+            } else if (snapshot.hasData) {
+              final type = snapshot.data;
+              if (type == null || type.isEmpty) {
+                return ListTile(
+                  title: Text('Invalid data for suggestion: $suggestion'),
+                );
+              }
+              final imageURL = type[1];
+              if (imageURL == null || !Uri.parse(imageURL).isAbsolute) {
+                // Handle invalid or missing image URL
+                return ListTile(
+                  title: Text('Invalid image URL for suggestion: $suggestion'),
+                );
+              }
+              return SizedBox(
+                height: 100,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/mediainfo',
+                        arguments: {"name": suggestion});
+                  },
+                  child: ListTile(
+                    leading: Image.network(imageURL),
+                    title: Text(suggestion,
+                        style: TextStyle(color: Colors.white)),
+                    subtitle: Text(type[0],
+                        style: TextStyle(color: Colors.grey)),
+                  ),
+                ),
+              );
+            } else {
+              return ListTile(
+                title: Text('No data available for suggestion: $suggestion'),
+              );
+            }
+          },
+        ),
+      );
+    },
+  );
+}
+
 }
 
 class DisplayMovieInfo extends StatelessWidget {
